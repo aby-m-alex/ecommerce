@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Details | Elevate Global</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .cd-hero {padding:140px 0 80px;background:linear-gradient(180deg,#0a0f1e,#141c2f);position:relative;overflow:hidden;}
+    .cd-grid {display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;}
+    .cd-img {border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.5);position:relative;}
+    .cd-img img {width:100%;display:block;}
+    .cd-badge {position:absolute;top:20px;left:20px;background:rgba(14,165,233,.9);color:#fff;padding:6px 16px;border-radius:50px;font-family:'Outfit';font-weight:700;font-size:.85rem;}
+    .cd-info h1 {font-family:'Outfit';font-size:3rem;font-weight:900;color:#fff;margin-bottom:16px;line-height:1.2;}
+    .cd-desc {font-size:1.1rem;color:#94a3b8;line-height:1.7;margin-bottom:30px;}
+    .cd-meta {display:flex;flex-wrap:wrap;gap:20px;margin-bottom:40px;}
+    .mc {display:flex;align-items:center;gap:10px;font-size:1rem;color:#cbd5e1;background:rgba(255,255,255,.03);padding:10px 20px;border-radius:12px;}
+    .mc i {color:#0ea5e9;font-size:1.2rem;}
+    .cd-price {font-family:'Outfit';font-size:2.5rem;font-weight:800;color:#10b981;margin-bottom:8px;}
+    .cd-actions {display:flex;gap:16px;margin-top:20px;}
+    
+    .syllabus-section {padding:80px 0;}
+    .sy-grid {display:grid;grid-template-columns:1fr;gap:20px;max-width:800px;margin:0 auto;}
+    .sy-card {background:#141c2f;border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:24px;display:flex;gap:20px;align-items:center;}
+    .sy-num {width:60px;height:60px;background:rgba(14,165,233,.1);color:#0ea5e9;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;flex-shrink:0;}
+    .sy-info h3 {color:#fff;font-family:'Outfit';font-size:1.2rem;}
+    @media(max-width:900px){.cd-grid{grid-template-columns:1fr;text-align:center;}.cd-meta{justify-content:center;}.cd-actions{justify-content:center;}}
+  </style>
+</head>
+<body>
+  <header id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark"><span class="logo-e">E</span><span class="logo-g">G</span></div>
+        <div class="logo-text"><span class="logo-name">Elevate</span><span class="logo-sub">Global</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="programs.html" class="nav-link active">Programs</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="admission.html" class="nav-link">Admission</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" style="display:flex;gap:12px;align-items:center;margin-left:auto;">
+         <a href="login.html" class="btn btn-outline" id="nav-auth-btn" style="padding:8px 20px;font-size:.85rem;border-color:rgba(14,165,233,.3);color:#0ea5e9;">Student Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="cd-hero">
+    <div class="container">
+      <div class="cd-grid" id="cd-content" style="display:none;">
+        <div class="cd-info">
+          <div style="color:#0ea5e9;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;" id="c-cat">Category</div>
+          <h1 id="c-title">Course Title</h1>
+          <p class="cd-desc" id="c-desc">Course description goes here.</p>
+          
+          <div class="cd-meta">
+            <div class="mc"><i class="fas fa-clock"></i> <span id="c-dur">0 Months</span></div>
+            <div class="mc"><i class="fas fa-signal"></i> <span id="c-lvl">All Levels</span></div>
+            <div class="mc"><i class="fas fa-users"></i> <span id="c-seat">20 Seats</span></div>
+          </div>
+          
+          <div class="cd-price">₹<span id="c-price">0</span></div>
+          <p style="color:#64748b;font-size:.85rem;margin-bottom:30px;">Includes certificate, lifetime access to materials, and live Google Meet sessions.</p>
+          
+          <div class="cd-actions">
+            <a href="#" class="btn btn-primary" id="btn-apply" style="padding:14px 32px;font-size:1.1rem;">Buy & Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="cd-img">
+          <img src="" id="c-img" alt="Course Image"/>
+          <span class="cd-badge" id="c-batch">Next Batch</span>
+        </div>
+      </div>
+      
+      <div id="loader" style="text-align:center;padding:100px 0;color:#0ea5e9;font-size:2rem;"><i class="fas fa-spinner fa-spin"></i></div>
+    </div>
+  </div>
+
+  <section class="syllabus-section">
+    <div class="container">
+      <h2 style="text-align:center;color:#fff;font-family:'Outfit';font-size:2rem;margin-bottom:40px;">Course Syllabus Preview</h2>
+      <div class="sy-grid" id="sy-grid">
+        <!-- Syllabus populated via JS -->
+      </div>
+      
+      <div style="text-align:center;margin-top:60px;">
+        <h3 style="color:#fff;margin-bottom:16px;">Already enrolled in this course?</h3>
+        <a href="login.html" class="btn btn-outline" style="min-width:200px;justify-content:center;">Login to Access Materials</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    async function init() {
+      const p = new URLSearchParams(window.location.search);
+      const cid = p.get('course');
+      if(!cid) { window.location.href = 'programs.html'; return; }
+      
+      try {
+        const r = await fetch('/api/courses');
+        const courses = await r.json();
+        
+        if(!courses[cid]) { window.location.href = 'programs.html'; return; }
+        const c = courses[cid];
+        
+        document.title = c.title + " | Elevate Global";
+        document.getElementById('c-cat').innerText = c.category;
+        document.getElementById('c-title').innerText = c.title;
+        document.getElementById('c-desc').innerText = c.desc;
+        document.getElementById('c-dur').innerText = c.duration;
+        document.getElementById('c-lvl').innerText = c.level || 'All Levels';
+        document.getElementById('c-seat').innerText = c.seats;
+        document.getElementById('c-price').innerText = c.price;
+        document.getElementById('c-img').src = c.image;
+        document.getElementById('c-batch').innerText = "Next Batch: " + (c.next_batch || 'Open');
+        
+        document.getElementById('btn-apply').href = "checkout.html?course=" + cid;
+        
+        // Mock syllabus parsing (since we don't have descriptions for modules in JSON, we just show numbers)
+        const sGrid = document.getElementById('sy-grid');
+        const fakeSyllabus = [
+             "Fundamentals & Overview",
+             "Core Principles & Deep Dive",
+             "Advanced Techniques",
+             "Live Project & Assessment"
+        ];
+        
+        sGrid.innerHTML = fakeSyllabus.map((s, i) => `
+          <div class="sy-card">
+            <div class="sy-num">0${i+1}</div>
+            <div class="sy-info">
+              <h3>${s}</h3>
+              <p style="color:#64748b;font-size:.85rem;margin-top:4px;">In-depth practical sessions included.</p>
+            </div>
+          </div>
+        `).join('');
+        
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('cd-content').style.display = 'grid';
+        
+      } catch(e) {
+        console.error(e);
+        window.location.href = 'programs.html';
+      }
+    }
+    
+    init();
+  </script>
+</body>
+</html>

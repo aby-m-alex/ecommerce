@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admission | Elevate Global</title>
+  <meta name="description" content="Apply for Elevate Global's add-on courses, internship programs, or get college admission counseling. Admissions open 2026."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .page-hero{padding:140px 0 80px;text-align:center;background:linear-gradient(180deg,#0a0f1e,#0d1528);position:relative;overflow:hidden;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(16,185,129,.15),transparent 65%);}
+    .page-hero h1{font-family:'Outfit',sans-serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:900;color:#fff;margin-bottom:16px;}
+    .page-hero p{font-size:1.1rem;color:#94a3b8;max-width:600px;margin:0 auto;}
+    .breadcrumb{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;font-size:.85rem;color:#64748b;}
+    .breadcrumb a{color:#0ea5e9;text-decoration:none;}
+    .adm-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:flex-start;}
+    .adm-info h2{font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:#fff;margin-bottom:12px;}
+    .adm-info p{color:#94a3b8;line-height:1.8;margin-bottom:32px;}
+    .steps-vertical{display:flex;flex-direction:column;gap:0;}
+    .step-v{display:flex;gap:20px;position:relative;padding-bottom:32px;}
+    .step-v:last-child{padding-bottom:0;}
+    .step-v:not(:last-child)::before{content:'';position:absolute;left:19px;top:44px;bottom:0;width:2px;background:linear-gradient(to bottom,#0ea5e9,transparent);}
+    .step-v-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;color:#fff;font-size:.9rem;flex-shrink:0;}
+    .step-v-body h4{font-family:'Outfit',sans-serif;font-weight:700;color:#fff;margin-bottom:4px;}
+    .step-v-body p{font-size:.88rem;color:#64748b;line-height:1.6;}
+    .adm-programs{margin-top:40px;}
+    .adm-programs h3{font-family:'Outfit',sans-serif;font-weight:700;color:#fff;margin-bottom:16px;font-size:1.1rem;}
+    .prog-chips{display:flex;flex-wrap:wrap;gap:10px;}
+    .prog-chip{background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#0ea5e9;padding:8px 16px;border-radius:50px;font-size:.85rem;font-family:'Outfit',sans-serif;font-weight:600;cursor:pointer;transition:all .3s;}
+    .prog-chip:hover,.prog-chip.selected{background:#0ea5e9;color:#fff;}
+    .adm-form-box{background:#141c2f;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:48px;}
+    .adm-form-box h3{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:6px;}
+    .adm-form-box .sub{color:#64748b;font-size:.9rem;margin-bottom:28px;}
+    .status-msg{display:none;padding:16px 20px;border-radius:12px;font-family:'Outfit',sans-serif;font-weight:600;margin-top:12px;text-align:center;}
+    .status-msg.success{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;display:block;}
+    .status-msg.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;display:block;}
+    @media(max-width:900px){.adm-layout{grid-template-columns:1fr;gap:40px;}}
+
+    /* ===== COLLEGES SECTION ===== */
+    .colleges-section{background:#0d1528;padding:100px 0;}
+    .college-filter{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+    .cf-btn{padding:9px 22px;border-radius:50px;border:1.5px solid rgba(255,255,255,.1);background:transparent;color:#94a3b8;font-family:'Outfit',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:all .3s;}
+    .cf-btn:hover,.cf-btn.active{background:linear-gradient(135deg,#0ea5e9,#7c3aed);border-color:transparent;color:#fff;}
+    .colleges-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+    .college-card{background:#141c2f;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;}
+    .college-card:hover{transform:translateY(-8px);border-color:rgba(14,165,233,.25);box-shadow:0 24px 60px rgba(0,0,0,.4);}
+    .college-img{position:relative;height:220px;overflow:hidden;}
+    .college-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+    .college-card:hover .college-img img{transform:scale(1.07);}
+    .college-state-badge{position:absolute;top:14px;left:14px;padding:5px 14px;border-radius:50px;font-size:.75rem;font-weight:700;color:#fff;font-family:'Outfit',sans-serif;backdrop-filter:blur(8px);}
+    .college-rating{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-radius:50px;padding:5px 12px;display:flex;align-items:center;gap:5px;font-family:'Outfit',sans-serif;font-weight:700;font-size:.82rem;color:#f59e0b;}
+    .college-body{padding:28px;flex:1;display:flex;flex-direction:column;}
+    .college-body h3{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:4px;}
+    .college-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
+    .college-meta-row span{font-size:.8rem;color:#64748b;display:flex;align-items:center;gap:5px;}
+    .college-meta-row i{color:#0ea5e9;}
+    .college-desc{font-size:.88rem;color:#94a3b8;line-height:1.7;margin-bottom:16px;}
+    .courses-label{font-family:'Outfit',sans-serif;font-weight:700;color:#fff;font-size:.85rem;margin-bottom:10px;}
+    .course-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+    .course-tag{background:rgba(14,165,233,.09);border:1px solid rgba(14,165,233,.18);color:#0ea5e9;padding:4px 11px;border-radius:50px;font-size:.75rem;font-family:'Outfit',sans-serif;font-weight:600;}
+    .college-footer{margin-top:auto;display:flex;gap:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:18px;}
+    .college-footer a{flex:1;text-align:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;}
+    .colleges-cta{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(124,58,237,.08));border:1px solid rgba(14,165,233,.2);border-radius:20px;padding:56px;text-align:center;margin-top:60px;}
+    .colleges-cta h2{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:10px;}
+    .colleges-cta p{color:#94a3b8;margin-bottom:24px;}
+    @media(max-width:768px){.colleges-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <header id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark"><span class="logo-e">E</span><span class="logo-g">G</span></div>
+        <div class="logo-text"><span class="logo-name">Elevate</span><span class="logo-sub">Global</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="programs.html" class="nav-link">Programs</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="admission.html" class="nav-link active">Admission</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" style="display:flex;gap:12px;align-items:center;margin-left:auto;">
+         <a href="login.html" class="btn btn-outline" id="nav-auth-btn" style="padding:8px 20px;font-size:.85rem;border-color:rgba(14,165,233,.3);color:#0ea5e9;">Student Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> <span>Admission</span></div>
+      <h1>Admissions <span class="gradient-text">Open 2026</span></h1>
+      <p>Apply for our add-on courses, college counseling, or internship programs. Limited seats available.</p>
+    </div>
+  </div>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="adm-layout">
+        <div class="adm-info" data-animate="fade-right">
+          <div class="section-label"><i class="fas fa-door-open"></i> How to Apply</div>
+          <h2>Simple 3-Step Process</h2>
+          <p>Getting started with Elevate Global is easy. Fill the form, speak with our team, and begin your journey to success.</p>
+
+          <div class="steps-vertical">
+            <div class="step-v">
+              <div class="step-v-num">1</div>
+              <div class="step-v-body">
+                <h4>Fill the Application Form</h4>
+                <p>Complete the inquiry form on this page with your details and program of interest.</p>
+              </div>
+            </div>
+            <div class="step-v">
+              <div class="step-v-num">2</div>
+              <div class="step-v-body">
+                <h4>Free Counseling Session</h4>
+                <p>Our expert counselors will contact you within 24 hours to understand your goals and guide you.</p>
+              </div>
+            </div>
+            <div class="step-v">
+              <div class="step-v-num">3</div>
+              <div class="step-v-body">
+                <h4>Confirm &amp; Secure Your Seat</h4>
+                <p>Choose your program, make the payment, and officially secure your seat. Batches fill fast!</p>
+              </div>
+            </div>
+            <div class="step-v">
+              <div class="step-v-num">4</div>
+              <div class="step-v-body">
+                <h4>Begin Your Journey</h4>
+                <p>Attend classes, build real projects, and earn your industry-recognized certificate upon completion.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="adm-programs">
+            <h3>Quick Select — Click a Program</h3>
+            <div class="prog-chips" id="prog-chips">
+              <span class="prog-chip" data-val="video">Video Production</span>
+              <span class="prog-chip" data-val="dm">Digital Marketing</span>
+              <span class="prog-chip" data-val="gd">Graphic Design</span>
+              <span class="prog-chip" data-val="web">Web Development</span>
+              <span class="prog-chip" data-val="event">Event Management</span>
+              <span class="prog-chip" data-val="photo">Photography</span>
+              <span class="prog-chip" data-val="internship">Internship Program</span>
+              <span class="prog-chip" data-val="admission">College Counseling</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="adm-form-box" data-animate="fade-left" id="adm-form">
+          <h3>Admission Application</h3>
+          <p class="sub">Fill in your details and we'll reach out within 24 hours.</p>
+          <form id="admission-page-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ap-name">Full Name *</label>
+                <input type="text" id="ap-name" name="name" placeholder="Your full name" required/>
+              </div>
+              <div class="form-group">
+                <label for="ap-phone">Phone *</label>
+                <input type="tel" id="ap-phone" name="phone" placeholder="+91 00000 00000" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ap-email">Email Address *</label>
+              <input type="email" id="ap-email" name="email" placeholder="your@email.com" required/>
+            </div>
+            <div class="form-group">
+              <label for="ap-program">Program of Interest *</label>
+              <select id="ap-program" name="program" required>
+                <option value="" disabled selected>Select a program...</option>
+                <option value="video">Professional Video Production</option>
+                <option value="dm">Digital Marketing Mastery</option>
+                <option value="gd">Graphic Design &amp; Branding</option>
+                <option value="web">Full-Stack Web Development</option>
+                <option value="event">Event Management Pro</option>
+                <option value="photo">Professional Photography</option>
+                <option value="internship">Internship Program</option>
+                <option value="admission">College Admission Counseling</option>
+                <option value="other">Other / Consultancy</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ap-qual">Qualification *</label>
+                <select id="ap-qual" name="qualification" required>
+                  <option value="" disabled selected>Your qualification...</option>
+                  <option value="10th">10th Pass</option>
+                  <option value="12th">12th Pass</option>
+                  <option value="ug">Undergraduate</option>
+                  <option value="grad">Graduate</option>
+                  <option value="pg">Post Graduate</option>
+                  <option value="working">Working Professional</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ap-city">City *</label>
+                <input type="text" id="ap-city" name="city" placeholder="Your city" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ap-message">Tell us about your goals</label>
+              <textarea id="ap-message" name="message" rows="3" placeholder="What do you hope to achieve with this program?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full-width" id="ap-submit">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+          </form>
+          <div class="status-msg" id="adm-status"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PARTNER COLLEGES ==================== -->
+  <section class="colleges-section" id="partner-colleges">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-label"><i class="fas fa-university"></i> Our College Network</div>
+        <h2 class="section-title">Partner Colleges &amp; Institutions</h2>
+        <p class="section-desc">We are the official admission &amp; event partner for 200+ colleges across Kerala and Karnataka. Browse our trusted college network and apply directly.</p>
+      </div>
+
+      <div class="college-filter" data-animate="fade-up">
+        <button class="cf-btn active" data-state="all">All Colleges</button>
+        <button class="cf-btn" data-state="kerala">Kerala</button>
+        <button class="cf-btn" data-state="karnataka">Karnataka</button>
+        <button class="cf-btn" data-state="arts">Arts &amp; Science</button>
+        <button class="cf-btn" data-state="engineering">Engineering</button>
+        <button class="cf-btn" data-state="management">Management</button>
+        <button class="cf-btn" data-state="nursing">Medical &amp; Nursing</button>
+        <button class="cf-btn" data-state="tamilnadu">Tamil Nadu</button>
+      </div>
+
+      <div class="colleges-grid" id="colleges-grid">
+
+        <!-- YMBC Kothamangalam -->
+        <div class="college-card" data-animate="fade-up" data-state="kerala arts management" id="college-ymbc">
+          <div class="college-img">
+            <img src="https://scontent.ftrv6-1.fna.fbcdn.net/v/t39.30808-6/480709272_1173345334797909_32764923935942669_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=2a1932&_nc_ohc=sVJdmJWS4GUQ7kNvwGl4xgf&_nc_oc=Adpn8yvMg5Wvtj48tgkD_R_8wEAM-GnZrzBjPyGAo4_Vze4mpNa1fPKKZJnK7g6D_lY&_nc_zt=23&_nc_ht=scontent.ftrv6-1.fna&_nc_gid=GigI_pthv7fD47Lyu_TwsQ&_nc_ss=7a389&oh=00_Af2o3DRkfgJFYIwgx-TfdQrZLlDuoOkA1Yj6t8l40WsYdQ&oe=69E1659E" alt="Yeldo Mar Baselios College Kothamangalam campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(14,165,233,.8);">Kerala</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.3</div>
+          </div>
+          <div class="college-body">
+            <h3>Yeldo Mar Baselios College (YMBC)</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Kothamangalam, Ernakulam</span>
+              <span><i class="fas fa-landmark"></i> MG University</span>
+              <span><i class="fas fa-calendar"></i> Est. 2003</span>
+            </div>
+            <p class="college-desc">A premier private co-educational institution affiliated with Mahatma Gandhi University. Known for its excellent Arts, Commerce, Design, and Computer programs. Consistently produces top-ranked graduates.</p>
+            <div class="courses-label">Courses Offered</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Com (Taxation)</span>
+              <span class="course-tag">B.Com (Computer App)</span>
+              <span class="course-tag">BBA</span>
+              <span class="course-tag">BCA</span>
+              <span class="course-tag">B.Sc Fashion Design</span>
+              <span class="course-tag">BA Animation &amp; VFX</span>
+              <span class="course-tag">BA Multimedia</span>
+              <span class="course-tag">MA Graphic Design</span>
+              <span class="course-tag">M.Com Finance</span>
+              <span class="course-tag">MSW</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('YMBC Kothamangalam')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Al-Azhar Thodupuzha -->
+        <div class="college-card" data-animate="fade-up" data-state="kerala arts engineering" id="college-alazhar">
+          <div class="college-img">
+            <img src="https://www.aamc.org.in/wp-content/uploads/2025/07/LATEST-MODIFIED-PHOTO.png" alt="Al-Azhar College Thodupuzha campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Kerala</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Al-Azhar Group of Institutions</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Thodupuzha, Idukki</span>
+              <span><i class="fas fa-landmark"></i> MG University / Calicut Univ.</span>
+              <span><i class="fas fa-calendar"></i> Est. 1993</span>
+            </div>
+            <p class="college-desc">One of the most comprehensive educational groups in central Kerala, encompassing Arts &amp; Science, Engineering, Law, Medical, and Polytechnic institutions under one banner.</p>
+            <div class="courses-label">Courses Offered</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Chemistry / Maths / Physics</span>
+              <span class="course-tag">B.Com Finance &amp; Taxation</span>
+              <span class="course-tag">BBA / BCA</span>
+              <span class="course-tag">B.Tech AI &amp; ML</span>
+              <span class="course-tag">B.Tech CSE (Cybersecurity)</span>
+              <span class="course-tag">B.Tech Civil / Mechanical</span>
+              <span class="course-tag">MBBS / BDS</span>
+              <span class="course-tag">B.Sc Nursing</span>
+              <span class="course-tag">BA LL.B / BBA LL.B</span>
+              <span class="course-tag">M.Sc / M.Com</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Al-Azhar Thodupuzha')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ELIMS Thrissur -->
+        <div class="college-card" data-animate="fade-up" data-state="kerala arts management" id="college-elims">
+          <div class="college-img">
+            <img src="https://elims.edu.in/wp-content/uploads/2024/03/clg-scaled.webp" alt="ELIMS College of Arts and Science Thrissur" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(245,158,11,.85);">Kerala</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.1</div>
+          </div>
+          <div class="college-body">
+            <h3>ELIMS College of Arts &amp; Science</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Thrissur, Kerala</span>
+              <span><i class="fas fa-landmark"></i> University of Calicut</span>
+              <span><i class="fas fa-calendar"></i> Est. 2014</span>
+            </div>
+            <p class="college-desc">A growing institution in the cultural capital of Kerala, offering focused Commerce, Business, and Computer programs. Known for personal attention and strong placement support.</p>
+            <div class="courses-label">Courses Offered</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Com Finance</span>
+              <span class="course-tag">B.Com Computer App</span>
+              <span class="course-tag">BBA</span>
+              <span class="course-tag">BCA</span>
+              <span class="course-tag">M.Com Finance</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('ELIMS College Thrissur')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAMS College -->
+        <div class="college-card" data-animate="fade-up" data-state="kerala arts management" id="college-mams">
+          <div class="college-img">
+            <img src="https://scontent.ftrv6-1.fna.fbcdn.net/v/t39.30808-6/474625204_1056655052932770_2055600131193365069_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=2a1932&_nc_ohc=jj0GkneTzvIQ7kNvwHhqzQ9&_nc_oc=Adqw769lR85EqFoDNrrYY76XTFIRwpwkQQKoKZsU5ewxj-VsO_yUJNNUeGaiigED6Jc&_nc_zt=23&_nc_ht=scontent.ftrv6-1.fna&_nc_gid=_sxMIEd--Ib70WOalh5Q3A&_nc_ss=7a389&oh=00_Af0EXHEeOxxcxJU_1RRYZ8fkdJNnYzeJ0IejLhM92hYuiw&oe=69E18020" alt="MAMS College Kerala campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(14,165,233,.8);">Kerala</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.2</div>
+          </div>
+          <div class="college-body">
+            <h3>Marian Academy of Management Studies (MAMS) </h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Ernakulam, Kerala</span>
+              <span><i class="fas fa-landmark"></i> MG University</span>
+              <span><i class="fas fa-calendar"></i> Est. 2008</span>
+            </div>
+            <p class="college-desc">A vibrant institution known for its creative Arts programs and active campus life. One of Elevate Global's oldest college fest partners — home to hundreds of events we have proudly managed.</p>
+            <div class="courses-label">Courses Offered</div>
+            <div class="course-tags">
+              <span class="course-tag">BA English</span>
+              <span class="course-tag">BA Visual Communication</span>
+              <span class="course-tag">B.Com Marketing</span>
+              <span class="course-tag">BBA</span>
+              <span class="course-tag">B.Sc Computer Science</span>
+              <span class="course-tag">BCA</span>
+              <span class="course-tag">MA English</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('MAMS College Ernakulam')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- City Arts & Science College -->
+        <div class="college-card" data-animate="fade-up" data-state="kerala arts engineering" id="college-city">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=700&q=80" alt="City Arts Science College Kochi campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(239,68,68,.8);">Kerala</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.0</div>
+          </div>
+          <div class="college-body">
+            <h3>City Arts &amp; Science College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Kochi, Ernakulam</span>
+              <span><i class="fas fa-landmark"></i> MG University</span>
+              <span><i class="fas fa-calendar"></i> Est. 2010</span>
+            </div>
+            <p class="college-desc">Located in the heart of Kochi, City College offers an excellent environment for students pursuing Science, Commerce, and Technology. Strong industry tie-ups and placement cell.</p>
+            <div class="courses-label">Courses Offered</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc CS / Electronics</span>
+              <span class="course-tag">B.Com Finance</span>
+              <span class="course-tag">BCA</span>
+              <span class="course-tag">BBA</span>
+              <span class="course-tag">B.Sc Mathematics</span>
+              <span class="course-tag">M.Sc CS</span>
+              <span class="course-tag">M.Com</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('City College Kochi')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+      
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-bgs-global-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=700&q=80" alt="BGS Global Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>BGS Global Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 13.60 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('BGS Global Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-sri-siddhartha-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=700&q=80" alt="Sri Siddhartha Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Sri Siddhartha Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Tumkur, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 10.75 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Sri Siddhartha Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-sri-devaraj-urs-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1582750433449-648ed127c09e?w=700&q=80" alt="Sri Devaraj Urs Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Sri Devaraj Urs Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Kolar, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 11.50 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Sri Devaraj Urs Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-rajarajeswari-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=700&q=80" alt="Rajarajeswari Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Rajarajeswari Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 14.00 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Rajarajeswari Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-oxford-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?w=700&q=80" alt="Oxford Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Oxford Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 11.00 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Oxford Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-east-point-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=700&q=80" alt="East Point Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>East Point Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 13.00 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('East Point Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-kamala-krishna-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=700&q=80" alt="Kamala Krishna College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Kamala Krishna College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 6.95 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Kamala Krishna College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-vanshika-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=700&q=80" alt="Vanshika College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Vanshika College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 7.95 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Vanshika College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-east-west-svn">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1527613426441-4da17471b56d?w=700&q=80" alt="East West SVN campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>East West SVN</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 8.25 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('East West SVN')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-sofia-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=700&q=80" alt="Sofia College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Sofia College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 8.75 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Sofia College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-jahan-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80" alt="Jahan College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Jahan College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 8.50 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Jahan College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-srinivas-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?w=700&q=80" alt="Srinivas Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Srinivas Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Mangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 12.50 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Srinivas Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-srinivas-nursing-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=700&q=80" alt="Srinivas Nursing College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Srinivas Nursing College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Mangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 11.85 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Srinivas Nursing College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-kanachur-medical-college">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ce243?w=700&q=80" alt="Kanachur Medical College campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Kanachur Medical College</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Mangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 11.45 Lakh</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Kanachur Medical College')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="karnataka nursing" id="college-aliyaah-college-of-nursing">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1628102491629-77858c42b2ab?w=700&q=80" alt="Aliyaah College of Nursing campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(16,185,129,.85);">Karnataka</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Aliyaah College of Nursing</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Mangalore, Karnataka</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - 8.50 Lakh</span>
+              <span class='course-tag' style='background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2)'>NO KCET</span>
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Aliyaah College of Nursing')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="tamilnadu nursing" id="college-srm-university">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=700&q=80" alt="SRM University campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(124,58,237,.85);">Tamil Nadu</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>SRM University</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - Package On Call</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('SRM University')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="tamilnadu nursing" id="college-chettinadu-university">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1576089172869-4f5f6f315620?w=700&q=80" alt="Chettinadu University campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(124,58,237,.85);">Tamil Nadu</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>Chettinadu University</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - Package On Call</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('Chettinadu University')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="college-card" data-animate="fade-up" data-state="tamilnadu nursing" id="college-vhs-ma-chidambaram">
+          <div class="college-img">
+            <img src="https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?w=700&q=80" alt="VHS MA Chidambaram campus" loading="lazy"/>
+            <span class="college-state-badge" style="background:rgba(124,58,237,.85);">Tamil Nadu</span>
+            <div class="college-rating"><i class="fas fa-star"></i> 4.5</div>
+          </div>
+          <div class="college-body">
+            <h3>VHS MA Chidambaram</h3>
+            <div class="college-meta-row">
+              <span><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</span>
+            </div>
+            <div class="courses-label">Program Packages</div>
+            <div class="course-tags">
+              <span class="course-tag">B.Sc Nursing - Package On Call</span>
+              
+            </div>
+            <div class="college-footer">
+              <a href="#adm-form" class="btn btn-sm" onclick="setCollege('VHS MA Chidambaram')">Apply via Elevate Global</a>
+              <a href="contact.html" class="btn btn-sm btn-outline">Enquire</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end colleges-grid -->
+
+      <div class="colleges-cta" data-animate="fade-up">
+        <h2>Don't See Your College?</h2>
+        <p>We work with 200+ institutions across India. Contact us and we'll help you with admission to your preferred college.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="#adm-form" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Apply Now</a>
+          <a href="contact.html" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Talk to a Counselor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 24px;">
+        <p style="font-size:.85rem;color:#64748b;">© 2026 Elevate Global. All Rights Reserved.</p>
+        <div style="display:flex;gap:20px;">
+          <a href="index.html" style="font-size:.85rem;color:#64748b;">Home</a>
+          <a href="programs.html" style="font-size:.85rem;color:#64748b;">Programs</a>
+          <a href="contact.html" style="font-size:.85rem;color:#64748b;">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <button class="back-top" id="back-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script>
+    document.getElementById('hamburger').addEventListener('click',function(){this.classList.toggle('active');document.getElementById('nav-menu').classList.toggle('open');});
+    window.addEventListener('scroll',()=>document.getElementById('back-top').classList.toggle('visible',window.scrollY>200));
+    document.getElementById('back-top').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('[data-animate]').forEach(el=>obs.observe(el));
+
+    // Quick select chips
+    document.querySelectorAll('.prog-chip').forEach(chip=>{
+      chip.addEventListener('click',()=>{
+        document.querySelectorAll('.prog-chip').forEach(c=>c.classList.remove('selected'));
+        chip.classList.add('selected');
+        document.getElementById('ap-program').value=chip.getAttribute('data-val');
+        document.getElementById('adm-form').scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    // Form Submission → Backend API
+    document.getElementById('admission-page-form').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const btn = document.getElementById('ap-submit');
+      const statusEl = document.getElementById('adm-status');
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+      btn.disabled = true;
+      statusEl.className = 'status-msg';
+      statusEl.style.display = 'none';
+
+      const data = Object.fromEntries(new FormData(this).entries());
+      try {
+        const res = await fetch('/api/admission', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if(result.success){
+          this.reset();
+          document.querySelectorAll('.prog-chip').forEach(c=>c.classList.remove('selected'));
+          statusEl.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' (Ref: ' + result.id + ')';
+          statusEl.className = 'status-msg success';
+        } else {
+          statusEl.innerHTML = '<i class="fas fa-times-circle"></i> Something went wrong. Please try again.';
+          statusEl.className = 'status-msg error';
+        }
+      } catch(err) {
+        statusEl.innerHTML = '<i class="fas fa-times-circle"></i> Could not reach the server. Please call us directly.';
+        statusEl.className = 'status-msg error';
+      }
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+      btn.disabled = false;
+    });
+
+    // ===== PROGRAM CHIP SELECTION =====
+    document.querySelectorAll('.prog-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.prog-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        const val = chip.getAttribute('data-val');
+        const select = document.getElementById('ap-program');
+        if (select) {
+            select.value = val;
+        }
+      });
+    });
+
+    // ===== COLLEGE FILTER TABS =====
+    document.querySelectorAll('.cf-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cf-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const state = btn.getAttribute('data-state');
+        document.querySelectorAll('.college-card').forEach((card, i) => {
+          const cardState = card.getAttribute('data-state') || '';
+          const show = state === 'all' || cardState.includes(state);
+          card.style.display = show ? 'flex' : 'none';
+          if (show) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.transition = `opacity 0.4s ease ${i*0.07}s, transform 0.4s ease ${i*0.07}s`;
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 10);
+          }
+        });
+      });
+    });
+
+    // ===== SET COLLEGE IN FORM =====
+    function setCollege(collegeName) {
+      const msgField = document.getElementById('ap-message');
+      const select = document.getElementById('ap-program');
+      if (select) select.value = 'college_counseling';
+      if (msgField) {
+        msgField.value = 'I am interested in applying to ' + collegeName + ' through Elevate Global. Please guide me with the admission process.';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard | Elevate Global</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body {background:#0a0f1e;color:#cbd5e1;padding-top:80px;}
+    .nav-dash {position:fixed;top:0;left:0;right:0;height:70px;background:#141c2f;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:100;}
+    .user-badge {display:flex;align-items:center;gap:12px;}
+    .avatar {width:36px;height:36px;background:#0ea5e9;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;}
+    .logout-btn {background:none;border:none;color:#ef4444;cursor:pointer;font-family:'Outfit';font-weight:600;}
+    .container-dash {max-width:1200px;margin:0 auto;padding:40px 20px;}
+    .welcome {margin-bottom:40px;}
+    .welcome h1 {color:#fff;font-family:'Outfit';font-size:2.2rem;}
+    .welcome p {color:#64748b;font-size:1.1rem;}
+    .enrolled-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:24px;}
+    .ecard {background:#141c2f;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;}
+    .ecard h3 {color:#fff;font-size:1.4rem;margin-bottom:16px;border-bottom:1px solid rgba(14,165,233,.2);padding-bottom:12px;color:#0ea5e9;}
+    .mod-item {display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.03);padding:12px 16px;border-radius:10px;margin-bottom:10px;color:#cbd5e1;text-decoration:none;transition:background .2s;}
+    .mod-item:hover {background:rgba(14,165,233,.1);}
+    .meet-btn {display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(16,185,129,.15);color:#10b981;border-radius:10px;padding:12px;margin-top:20px;text-decoration:none;font-weight:700;}
+    .meet-btn:hover {background:#10b981;color:#fff;}
+    .empty-state {text-align:center;padding:60px 20px;background:#141c2f;border-radius:20px;border:1px dashed rgba(255,255,255,.1);}
+  </style>
+</head>
+<body>
+
+  <div class="nav-dash">
+    <div style="color:#fff;font-family:'Outfit';font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-graduation-cap" style="color:#0ea5e9;"></i> EG Learning</div>
+    <div class="user-badge">
+      <div class="avatar" id="u-ava">U</div>
+      <div style="font-size:.9rem;font-weight:600;" id="u-name">Loading...</div>
+      <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="container-dash">
+    <div class="welcome">
+      <h1 id="greet">Welcome back!</h1>
+      <p>Here are your enrolled courses and upcoming live sessions.</p>
+    </div>
+    
+    <div class="enrolled-grid" id="course-grid">
+      <!-- Courses populated via JS -->
+    </div>
+  </div>
+
+  <script>
+    async function loadData() {
+      try {
+        const r = await fetch('/api/session');
+        const res = await r.json();
+        
+        if(!res.success) {
+          window.location.href = '/login.html';
+          return;
+        }
+        
+        const user = res.user;
+        document.getElementById('u-name').innerText = user.name;
+        document.getElementById('u-ava').innerText = user.name.charAt(0).toUpperCase();
+        document.getElementById('greet').innerText = `Welcome back, ${user.name.split(' ')[0]}!`;
+        
+        const grid = document.getElementById('course-grid');
+        if(!res.enrolled || res.enrolled.length === 0) {
+          grid.style.display = 'block';
+          grid.innerHTML = `<div class="empty-state">
+            <i class="fas fa-box-open" style="font-size:3rem;color:#64748b;margin-bottom:16px;"></i>
+            <h3>No Active Courses Found</h3>
+            <p style="color:#64748b;margin-top:8px;">You haven't been enrolled in any courses yet. If you recently paid, please allow up to 24 hours.</p>
+            <a href="programs.html" class="btn btn-primary" style="margin-top:20px;">Browse Programs</a>
+          </div>`;
+          return;
+        }
+        
+        grid.innerHTML = '';
+        res.enrolled.forEach(c => {
+          let mods = c.modules.map(m => `
+            <a href="${m.link}" target="_blank" class="mod-item">
+              <span><i class="far fa-file-pdf" style="color:#f59e0b;margin-right:8px;"></i> ${m.title}</span>
+              <i class="fas fa-download" style="color:#64748b;"></i>
+            </a>
+          `).join('');
+          
+          let meet = c.meet_link ? `
+            <a href="${c.meet_link}" target="_blank" class="meet-btn">
+              <i class="fas fa-video"></i> Join Live Class (Google Meet)
+            </a>
+          ` : `<div style="text-align:center;padding:10px;font-size:.85rem;color:#64748b;background:rgba(255,255,255,.03);border-radius:10px;margin-top:20px;"><i class="fas fa-video-slash"></i> No Live Link Set</div>`;
+          
+          grid.innerHTML += `
+            <div class="ecard">
+              <h3>${c.title}</h3>
+              <div style="color:#cbd5e1;font-size:.9rem;font-weight:600;margin-bottom:12px;">Course Materials</div>
+              ${mods || '<p style="color:#64748b;font-size:.85rem;font-style:italic;">No modules available yet.</p>'}
+              ${meet}
+            </div>
+          `;
+        });
+      } catch(e) {
+        console.error('Session fetch error:', e);
+        // Show a retry message instead of redirecting — may just be a brief server hiccup
+        document.getElementById('course-grid').style.display = 'block';
+        document.getElementById('course-grid').innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-wifi" style="font-size:3rem;color:#ef4444;margin-bottom:16px;"></i>
+            <h3 style="color:#fff;">Connection Error</h3>
+            <p style="color:#64748b;margin-top:8px;">Could not reach the server. The server may be starting up — please wait a moment.</p>
+            <button onclick="loadData()" class="btn btn-primary" style="margin-top:20px;"><i class="fas fa-redo"></i> Retry Now</button>
+            <a href="/login.html" style="display:block;margin-top:12px;color:#64748b;font-size:.85rem;">Back to Login</a>
+          </div>`;
+      }
+    }
+    
+    async function logout() {
+      await fetch('/api/logout', {method:'POST'});
+      window.location.href = '/login.html';
+    }
+    
+    loadData();
+  </script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Elevate Global</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Razorpay Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    body { background:#0a0f1e; }
+    .nav-checkout { height:70px; border-bottom:1px solid rgba(255,255,255,.05); display:flex; align-items:center; justify-content:center; background:#141c2f; }
+    .co-container { max-width:1050px; margin:40px auto; padding:0 20px; }
+    .co-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:40px; }
+    .co-card { background:#141c2f; border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:40px; }
+    .co-card h2 { font-family:'Outfit'; color:#fff; margin-bottom:24px; font-size:1.5rem; }
+    .inp-group { margin-bottom:20px; }
+    .inp-group label { display:block; color:#cbd5e1; font-size:.85rem; margin-bottom:8px; font-weight:600; }
+    .inp-group input { width:100%; background:#0a0f1e; border:1px solid rgba(255,255,255,.1); color:#fff; padding:14px; border-radius:12px; font-family:'Outfit'; outline:none; font-size:1rem; transition:border-color .2s; }
+    .inp-group input:focus { border-color:#0ea5e9; }
+    .summ-item { display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid rgba(255,255,255,.05); color:#94a3b8; font-size:.95rem; }
+    .summ-item.total { font-weight:800; color:#fff; font-size:1.3rem; border-bottom:none; padding-top:24px; margin-top:8px; border-top:1px dashed rgba(255,255,255,.1); }
+
+    /* Payment tabs */
+    .pay-tabs { display:flex; gap:0; margin:24px 0 20px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.1); }
+    .pay-tab { flex:1; padding:13px; text-align:center; font-family:'Outfit'; font-size:.9rem; font-weight:700; cursor:pointer; background:#0a0f1e; color:#64748b; border:none; transition:all .2s; }
+    .pay-tab.active { background:rgba(14,165,233,.15); color:#0ea5e9; }
+    .pay-tab:first-child { border-right:1px solid rgba(255,255,255,.1); }
+
+    /* QR section */
+    .qr-section { display:none; text-align:center; padding:20px 0; }
+    .qr-section.active { display:block; }
+    .qr-box { background:#0a0f1e; border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:24px; display:inline-block; }
+    .qr-box img { width:200px; height:200px; border-radius:8px; }
+    .qr-amount { font-family:'Outfit'; font-size:1.8rem; font-weight:800; color:#10b981; margin:16px 0 4px; }
+
+    /* Card section */
+    .card-section { display:none; }
+    .card-section.active { display:block; }
+
+    .pay-btn { width:100%; padding:16px; font-size:1.1rem; font-weight:800; justify-content:center; display:flex; align-items:center; gap:12px; background:linear-gradient(135deg,#0ea5e9,#7c3aed); border:none; border-radius:14px; color:#fff; cursor:pointer; font-family:'Outfit'; transition:all .2s; margin-top:8px; }
+    .pay-btn:hover { opacity:.9; transform:translateY(-1px); }
+    .pay-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+
+    /* Modal */
+    .overlay-modal { position:fixed; inset:0; background:rgba(0,0,0,.85); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; z-index:999; }
+    .modal-box { background:#141c2f; border-radius:24px; padding:40px; text-align:center; max-width:420px; width:90%; border:1px solid rgba(255,255,255,.1); }
+    .modal-box i { font-size:3.5rem; margin-bottom:20px; }
+    .modal-box.success i { color:#10b981; }
+    .modal-box.processing i { color:#0ea5e9; }
+    .modal-box.error-box i { color:#ef4444; }
+    .modal-box h3 { color:#fff; font-size:1.4rem; font-family:'Outfit'; margin-bottom:10px; }
+    .modal-box p { color:#94a3b8; margin-bottom:24px; line-height:1.6; }
+    .modal-close { background:#334155; color:#fff; border:none; padding:10px 24px; border-radius:10px; cursor:pointer; font-family:'Outfit'; font-weight:600; margin-top:8px; }
+
+    /* Security badge */
+    .security-badge { margin-top:24px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2); color:#10b981; padding:14px 16px; border-radius:12px; font-size:.82rem; display:flex; gap:12px; align-items:center; }
+
+    /* Razorpay branding */
+    .rzp-brand { text-align:center; margin-top:16px; color:#64748b; font-size:.78rem; }
+    .rzp-brand img { height:18px; vertical-align:middle; margin-right:6px; filter:brightness(0.6); }
+
+    @media(max-width:800px){ .co-grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="nav-checkout">
+    <div style="color:#fff;font-family:'Outfit';font-weight:800;font-size:1.4rem;">
+      <span style="color:#0ea5e9;">Elevate</span> Global Checkout
+    </div>
+  </div>
+
+  <div class="co-container">
+    <a href="programs.html" style="color:#0ea5e9;text-decoration:none;display:inline-block;margin-bottom:24px;font-weight:600;">
+      <i class="fas fa-arrow-left"></i> Back to Courses
+    </a>
+
+    <div class="co-grid">
+      <!-- LEFT: Form -->
+      <div class="co-card">
+        <h2><i class="fas fa-user-circle" style="color:#0ea5e9;margin-right:10px;"></i>Your Details</h2>
+        <form id="checkout-form">
+          <div class="inp-group">
+            <label>Full Name</label>
+            <input type="text" id="fn" required placeholder="John Doe"/>
+          </div>
+          <div class="inp-group">
+            <label>Email Address</label>
+            <input type="email" id="em" required placeholder="john@example.com"/>
+          </div>
+          <div class="inp-group">
+            <label>Phone Number</label>
+            <input type="tel" id="ph" required placeholder="+91 00000 00000"/>
+          </div>
+
+          <h2 style="margin-top:32px;">Payment Method</h2>
+
+          <!-- Tabs -->
+          <div class="pay-tabs">
+            <button type="button" class="pay-tab active" id="tab-card" onclick="switchTab('card')">
+              <i class="fas fa-credit-card"></i> Card / UPI / GPay
+            </button>
+            <button type="button" class="pay-tab" id="tab-qr" onclick="switchTab('qr')">
+              <i class="fas fa-qrcode"></i> Scan QR Code
+            </button>
+          </div>
+
+          <!-- UPI App Icons row -->
+          <div id="upi-apps" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;padding:12px;background:rgba(255,255,255,.02);border-radius:12px;border:1px solid rgba(255,255,255,.06);">
+            <span style="color:#64748b;font-size:.78rem;font-weight:600;margin-right:4px;">Pay via:</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/512px-Google_Pay_Logo.svg.png" title="Google Pay" style="height:28px;border-radius:6px;background:#fff;padding:3px 6px;cursor:pointer;" onclick="payWithUPI('gpay')"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/PhonePe_Logo.svg/512px-PhonePe_Logo.svg.png" title="PhonePe" style="height:28px;border-radius:6px;background:#fff;padding:3px 6px;cursor:pointer;" onclick="payWithUPI('phonepe')"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/512px-Paytm_Logo_%28standalone%29.svg.png" title="Paytm" style="height:28px;border-radius:6px;background:#fff;padding:3px 6px;cursor:pointer;" onclick="payWithUPI('paytm')"/>
+            <span style="color:#64748b;font-size:.75rem;margin-left:4px;">or card / netbanking below</span>
+          </div>
+
+          <!-- Card / SDK section -->
+          <div class="card-section active" id="card-section">
+            <button type="submit" class="pay-btn" id="pay-btn">
+              <i class="fas fa-lock"></i> Pay Securely via Razorpay
+            </button>
+            <div class="rzp-brand">
+              Supports GPay · PhonePe · Paytm · Cards · NetBanking · Powered by <strong style="color:#94a3b8;">Razorpay</strong>
+            </div>
+          </div>
+
+          <!-- QR section -->
+          <div class="qr-section" id="qr-section">
+            <div class="qr-box">
+              <!-- QR code generated from the Razorpay link -->
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://rzp.io/rzp/RGec1vv&color=0ea5e9&bgcolor=0a0f1e" alt="Razorpay QR Code"/>
+              <div class="qr-amount">₹<span id="qr-price">0</span></div>
+              <p style="color:#94a3b8;font-size:.85rem;margin:0;">Scan with any UPI app to pay</p>
+              <a href="https://rzp.io/rzp/RGec1vv" target="_blank" style="display:inline-block;margin-top:12px;color:#0ea5e9;font-size:.85rem;font-weight:600;">
+                <i class="fas fa-external-link-alt"></i> Open Razorpay Link
+              </a>
+            </div>
+            <p style="color:#64748b;font-size:.82rem;margin-top:16px;">
+              After payment, click below to confirm your enrollment
+            </p>
+            <button type="button" onclick="confirmQrPayment()" class="pay-btn" style="margin-top:8px;">
+              <i class="fas fa-check-circle"></i> I've Completed Payment
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- RIGHT: Order Summary -->
+      <div class="co-card">
+        <h2><i class="fas fa-receipt" style="color:#0ea5e9;margin-right:10px;"></i>Order Summary</h2>
+        <div style="display:flex;gap:16px;margin-bottom:30px;">
+          <img src="" id="s-img" style="width:100px;height:70px;border-radius:10px;object-fit:cover;"/>
+          <div>
+            <h4 style="color:#fff;font-family:'Outfit';font-size:1.05rem;margin-bottom:6px;" id="s-title">Loading...</h4>
+            <span style="color:#0ea5e9;font-size:.78rem;font-weight:700;background:rgba(14,165,233,.1);padding:4px 10px;border-radius:50px;" id="s-cat">Live Batch</span>
+          </div>
+        </div>
+
+        <div class="summ-item"><span>Course Fee</span><span>₹<span id="s-price">0</span></span></div>
+        <div class="summ-item"><span>Processing Fee</span><span style="color:#10b981;">FREE</span></div>
+        <div class="summ-item"><span>GST (18% incl.)</span><span>Included</span></div>
+        <div class="summ-item total"><span>Total Payable</span><span>₹<span id="s-total">0</span></span></div>
+
+        <div class="security-badge">
+          <i class="fas fa-shield-alt" style="font-size:1.4rem;flex-shrink:0;"></i>
+          <span>100% Secure Checkout. Your data is protected with bank-level encryption via Razorpay.</span>
+        </div>
+
+        <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,.02);border-radius:12px;border:1px solid rgba(255,255,255,.05);">
+          <p style="color:#94a3b8;font-size:.82rem;line-height:1.6;">
+            <i class="fas fa-info-circle" style="color:#0ea5e9;margin-right:6px;"></i>
+            Your student account will be created automatically after successful payment. You can log in using your email address.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Processing Modal -->
+  <div class="overlay-modal" id="modal">
+    <div class="modal-box processing" id="m-proc">
+      <i class="fas fa-circle-notch fa-spin"></i>
+      <h3>Processing...</h3>
+      <p>Please do not close this window.</p>
+    </div>
+
+    <div class="modal-box success" id="m-succ" style="display:none;">
+      <i class="fas fa-check-circle"></i>
+      <h3>Payment Successful! 🎉</h3>
+      <p id="receipt-msg">Your enrollment is confirmed. Use your email to login to the student portal.</p>
+      <a href="login.html" class="pay-btn" style="text-decoration:none;margin-top:8px;">
+        <i class="fas fa-sign-in-alt"></i> Go to Student Login
+      </a>
+    </div>
+
+    <div class="modal-box error-box" id="m-err" style="display:none;">
+      <i class="fas fa-times-circle"></i>
+      <h3>Payment Failed</h3>
+      <p id="err-msg">Something went wrong. Please try again or contact support.</p>
+      <button class="modal-close" onclick="document.getElementById('modal').style.display='none';document.getElementById('m-err').style.display='none';document.getElementById('m-proc').style.display='block';">Try Again</button>
+    </div>
+  </div>
+
+  <script>
+    let courseId = "";
+    let coursePrice = 0;
+    let submissionId = "";
+
+    function switchTab(tab) {
+      document.getElementById('tab-card').classList.toggle('active', tab === 'card');
+      document.getElementById('tab-qr').classList.toggle('active', tab === 'qr');
+      document.getElementById('card-section').classList.toggle('active', tab === 'card');
+      document.getElementById('qr-section').classList.toggle('active', tab === 'qr');
+      // Hide/show UPI app row
+      document.getElementById('upi-apps').style.display = (tab === 'card') ? 'flex' : 'none';
+    }
+
+    // Called when user clicks GPay / PhonePe / Paytm logo
+    async function payWithUPI(app) {
+      const fn = document.getElementById('fn').value.trim();
+      const em = document.getElementById('em').value.trim().toLowerCase();
+      const ph = document.getElementById('ph').value.trim();
+
+      if (!fn || !em || !ph) {
+        alert("Please fill your Name, Email and Phone first, then tap the app icon to pay.");
+        return;
+      }
+
+      document.getElementById('pay-btn').disabled = true;
+      document.getElementById('pay-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+
+      try {
+        // Register admission
+        const admR = await fetch('/api/admission', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: fn, email: em, phone: ph, program: courseId, subject: "UPI Payment - " + app, message: "Paid via " + app })
+        });
+        const admRes = await admR.json();
+        submissionId = admRes.id || "";
+
+        // Create Razorpay order
+        const orderR = await fetch('/api/create_order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: coursePrice, receipt: submissionId })
+        });
+        const orderData = await orderR.json();
+
+        if (orderData.fallback) {
+          window.location.href = orderData.qr_link;
+          return;
+        }
+
+        document.getElementById('pay-btn').innerHTML = '<i class="fas fa-lock"></i> Pay Securely via Razorpay';
+        document.getElementById('pay-btn').disabled = false;
+
+        // Map app name to Razorpay UPI method config
+        const upiConfig = {
+          gpay:    { flow: "intent", app_present: 1 },
+          phonepe: { flow: "intent", app_present: 1 },
+          paytm:   { flow: "intent", app_present: 1 }
+        };
+
+        const options = {
+          key: orderData.key_id,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: "Elevate Global",
+          description: document.getElementById('s-title').innerText,
+          order_id: orderData.order_id,
+          config: {
+            display: {
+              blocks: {
+                upi: { name: "Pay via UPI App", instruments: [{ method: "upi", flows: ["intent"] }] }
+              },
+              sequence: ["block.upi"],
+              preferences: { show_default_blocks: false }
+            }
+          },
+          handler: async function (response) {
+            document.getElementById('modal').style.display = 'flex';
+            try {
+              const verifyR = await fetch('/api/verify_payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                  submission_id: submissionId, email: em, name: fn, program: courseId
+                })
+              });
+              const verifyRes = await verifyR.json();
+              document.getElementById('m-proc').style.display = 'none';
+              if (verifyRes.success) {
+                document.getElementById('m-succ').style.display = 'block';
+                document.getElementById('receipt-msg').innerText = verifyRes.message;
+              } else {
+                document.getElementById('m-err').style.display = 'block';
+              }
+            } catch (err) {
+              document.getElementById('m-proc').style.display = 'none';
+              document.getElementById('m-err').style.display = 'block';
+            }
+          },
+          prefill: { name: fn, email: em, contact: ph, method: "upi" },
+          theme: { color: "#0ea5e9" }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+      } catch (err) {
+        document.getElementById('pay-btn').disabled = false;
+        document.getElementById('pay-btn').innerHTML = '<i class="fas fa-lock"></i> Pay Securely via Razorpay';
+        alert("Could not initiate payment. Please try again.");
+      }
+    }
+
+    async function init() {
+      const p = new URLSearchParams(window.location.search);
+      courseId = p.get('course');
+      if (!courseId) { window.location.href = 'programs.html'; return; }
+
+      try {
+        const r = await fetch('/api/courses');
+        const courses = await r.json();
+        if (!courses[courseId]) { window.location.href = 'programs.html'; return; }
+        const c = courses[courseId];
+
+        coursePrice = parseInt(c.price);
+        document.title = c.title + " | Elevate Global Checkout";
+        document.getElementById('s-title').innerText = c.title;
+        document.getElementById('s-cat').innerText = c.category + " · Live Batch";
+        document.getElementById('s-price').innerText = c.price;
+        document.getElementById('s-total').innerText = c.price;
+        document.getElementById('s-img').src = c.image;
+        document.getElementById('qr-price').innerText = c.price;
+      } catch (e) {
+        window.location.href = 'programs.html';
+      }
+    }
+
+    // ===== MAIN CHECKOUT FORM (Razorpay SDK Modal) =====
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fn = document.getElementById('fn').value.trim();
+      const em = document.getElementById('em').value.trim().toLowerCase();
+      const ph = document.getElementById('ph').value.trim();
+
+      if (!fn || !em || !ph) return alert("Please fill all fields.");
+
+      document.getElementById('pay-btn').disabled = true;
+      document.getElementById('pay-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...';
+
+      try {
+        // Step 1: Register admission in backend
+        const admR = await fetch('/api/admission', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: fn, email: em, phone: ph, program: courseId, subject: "Direct Enrollment", message: "Enrolled via Checkout" })
+        });
+        const admRes = await admR.json();
+        submissionId = admRes.id || "";
+
+        // Step 2: Create Razorpay order server-side
+        const orderR = await fetch('/api/create_order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: coursePrice, receipt: submissionId })
+        });
+        const orderData = await orderR.json();
+
+        // Fallback: if order creation fails, redirect to QR link
+        if (orderData.fallback) {
+          window.location.href = orderData.qr_link;
+          return;
+        }
+
+        document.getElementById('pay-btn').innerHTML = '<i class="fas fa-lock"></i> Pay Securely via Razorpay';
+        document.getElementById('pay-btn').disabled = false;
+
+        // Step 3: Open Razorpay Checkout Modal
+        const options = {
+          key: orderData.key_id,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: "Elevate Global",
+          description: document.getElementById('s-title').innerText,
+          image: "https://i.imgur.com/n5tjHFD.png",
+          order_id: orderData.order_id,
+          handler: async function (response) {
+            // Step 4: Verify payment on backend
+            document.getElementById('modal').style.display = 'flex';
+            try {
+              const verifyR = await fetch('/api/verify_payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                  submission_id: submissionId,
+                  email: em,
+                  name: fn,
+                  program: courseId
+                })
+              });
+              const verifyRes = await verifyR.json();
+              document.getElementById('m-proc').style.display = 'none';
+              if (verifyRes.success) {
+                document.getElementById('m-succ').style.display = 'block';
+                document.getElementById('receipt-msg').innerText = verifyRes.message;
+              } else {
+                document.getElementById('m-err').style.display = 'block';
+                document.getElementById('err-msg').innerText = verifyRes.message || "Verification failed.";
+              }
+            } catch (err) {
+              document.getElementById('m-proc').style.display = 'none';
+              document.getElementById('m-err').style.display = 'block';
+            }
+          },
+          prefill: { name: fn, email: em, contact: ph },
+          notes: { course: courseId, submission_id: submissionId },
+          theme: { color: "#0ea5e9" },
+          modal: {
+            ondismiss: function () {
+              document.getElementById('pay-btn').disabled = false;
+              document.getElementById('pay-btn').innerHTML = '<i class="fas fa-lock"></i> Pay Securely via Razorpay';
+            }
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response) {
+          document.getElementById('modal').style.display = 'flex';
+          document.getElementById('m-proc').style.display = 'none';
+          document.getElementById('m-err').style.display = 'block';
+          document.getElementById('err-msg').innerText = response.error.description || "Payment failed. Please retry.";
+        });
+        rzp.open();
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('pay-btn').disabled = false;
+        document.getElementById('pay-btn').innerHTML = '<i class="fas fa-lock"></i> Pay Securely via Razorpay';
+        alert("Could not initiate payment. Please try again.");
+      }
+    });
+
+    // ===== QR CODE CONFIRMATION =====
+    async function confirmQrPayment() {
+      const fn = document.getElementById('fn').value.trim();
+      const em = document.getElementById('em').value.trim().toLowerCase();
+      const ph = document.getElementById('ph').value.trim();
+
+      if (!fn || !em || !ph) return alert("Please fill your Name, Email and Phone above first.");
+
+      document.getElementById('modal').style.display = 'flex';
+
+      try {
+        // Register in backend
+        const admR = await fetch('/api/admission', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: fn, email: em, phone: ph, program: courseId, subject: "QR Payment", message: "Paid via QR Code" })
+        });
+        const admRes = await admR.json();
+        submissionId = admRes.id || "";
+
+        // Mark as paid
+        const payR = await fetch('/api/payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: submissionId })
+        });
+        const payRes = await payR.json();
+
+        document.getElementById('m-proc').style.display = 'none';
+        document.getElementById('m-succ').style.display = 'block';
+        document.getElementById('receipt-msg').innerText = `Enrollment recorded for ${em}. Please log in to access your course.`;
+      } catch (err) {
+        document.getElementById('m-proc').style.display = 'none';
+        document.getElementById('m-err').style.display = 'block';
+        document.getElementById('err-msg').innerText = "Could not confirm. Please contact support.";
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elevate Global | Media · Events · Consultancy · Courses</title>
+  <meta name="description" content="Elevate Global is a premier agency offering advertisement, media, events management, admission consultancy, and add-on courses for institutions and individuals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark"><span class="logo-e">E</span><span class="logo-g">G</span></div>
+        <div class="logo-text"><span class="logo-name">Elevate</span><span class="logo-sub">Global</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="programs.html" class="nav-link">Programs</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="admission.html" class="nav-link">Admission</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" style="display:flex;gap:12px;align-items:center;margin-left:auto;">
+         <a href="login.html" class="btn btn-outline" id="nav-auth-btn" style="padding:8px 20px;font-size:.85rem;border-color:rgba(14,165,233,.3);color:#0ea5e9;">Student Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="home" class="hero">
+    <div class="hero-bg-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-star"></i> Premier Agency Since 2015
+      </div>
+      <h1 class="hero-title">
+        We <span class="gradient-text">Elevate</span> Your<br/>Brand to New Heights
+      </h1>
+      <p class="hero-desc">
+        Advertising · Media Production · Event Management · College Admissions · Consultancy · Add-on Courses — all under one roof.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary" id="hero-explore-btn">Explore Services</a>
+        <a href="#events" class="btn btn-outline" id="hero-events-btn">
+          <i class="fas fa-play-circle"></i> View Events
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Events Delivered</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">200+</span><span class="stat-label">Partner Colleges</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">10K+</span><span class="stat-label">Students Placed</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">Brand Clients</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <a href="#about" class="scroll-indicator" id="hero-scroll-btn">
+        <span>Scroll Down</span>
+        <i class="fas fa-chevron-down"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="about section-pad">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images" data-animate="fade-right">
+          <div class="about-img-main">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80" alt="Team meeting and collaboration at Elevate Global" loading="lazy" />
+          </div>
+          <div class="about-img-float">
+            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80" alt="Creative strategy session" loading="lazy" />
+          </div>
+          <div class="about-exp-badge">
+            <span class="exp-number">10+</span>
+            <span class="exp-text">Years of Excellence</span>
+          </div>
+        </div>
+
+        <div class="about-content" data-animate="fade-left">
+          <div class="section-label"><i class="fas fa-info-circle"></i> Who We Are</div>
+          <h2 class="section-title">Your All-in-One Growth Partner</h2>
+          <p class="about-text">
+            <strong>Elevate Global</strong> is a dynamic, multi-discipline agency headquartered to serve institutions, brands, and individuals across the country. We bridge the gap between creative excellence and strategic results.
+          </p>
+          <p class="about-text">
+            From managing spectacular college fests and brand campaigns to guiding students through admission processes and professional skill development — we are the team that makes it happen.
+          </p>
+          <div class="about-features">
+            <div class="feature-item"><i class="fas fa-check-circle"></i> ISO Certified Agency</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Expert Consultants</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Pan-India Network</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> 24/7 Support</div>
+          </div>
+          <a href="#contact" class="btn btn-primary" id="about-cta-btn">Work With Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services" class="services section-pad bg-dark">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-label"><i class="fas fa-cogs"></i> What We Do</div>
+        <h2 class="section-title">Our Core Services</h2>
+        <p class="section-desc">Comprehensive solutions tailored to your unique needs — from creative media to strategic education consulting.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card" data-animate="fade-up" id="service-ad">
+          <div class="service-icon" style="--icon-color: #00d4ff;">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <h3>Advertisement</h3>
+          <p>Strategic multi-channel ad campaigns — digital, print, outdoor, and broadcast. We make your brand unmissable.</p>
+          <ul class="service-list">
+            <li>Digital Ad Campaigns</li>
+            <li>Outdoor & Hoarding</li>
+            <li>Social Media Ads</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card featured" data-animate="fade-up" id="service-media">
+          <div class="service-badge">Most Popular</div>
+          <div class="service-icon" style="--icon-color: #7c3aed;">
+            <i class="fas fa-photo-video"></i>
+          </div>
+          <h3>Media Production</h3>
+          <p>Professional photography, videography, photo editing, graphic design, and content creation to tell your brand's story.</p>
+          <ul class="service-list">
+            <li>Video Production</li>
+            <li>Graphic Design & Branding</li>
+            <li>Content Creation</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card" data-animate="fade-up" id="service-events">
+          <div class="service-icon" style="--icon-color: #f59e0b;">
+            <i class="fas fa-calendar-star"></i>
+          </div>
+          <h3>Event Management</h3>
+          <p>End-to-end event planning, logistics, décor, and execution — from college fests to corporate conferences.</p>
+          <ul class="service-list">
+            <li>College Cultural Fests</li>
+            <li>Corporate Events</li>
+            <li>Product Launches</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card" data-animate="fade-up" id="service-admission">
+          <div class="service-icon" style="--icon-color: #10b981;">
+            <i class="fas fa-university"></i>
+          </div>
+          <h3>Admission Services</h3>
+          <p>Expert guidance for college admissions — from application to enrollment. Domestic and international programs covered.</p>
+          <ul class="service-list">
+            <li>College Counseling</li>
+            <li>Application Assistance</li>
+            <li>Entrance Exam Prep</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card" data-animate="fade-up" id="service-consultancy">
+          <div class="service-icon" style="--icon-color: #ef4444;">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3>Consultancy</h3>
+          <p>Strategic business consulting for institutions and brands. We provide actionable insights that drive real growth.</p>
+          <ul class="service-list">
+            <li>Brand Strategy</li>
+            <li>Institutional Consulting</li>
+            <li>Market Research</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card" data-animate="fade-up" id="service-digital">
+          <div class="service-icon" style="--icon-color: #06b6d4;">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Digital Marketing</h3>
+          <p>SEO, social media management, email marketing, and performance analytics to grow your online presence.</p>
+          <ul class="service-list">
+            <li>SEO & SEM</li>
+            <li>Social Media Management</li>
+            <li>Analytics & Reporting</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card" data-animate="fade-up" id="service-internship">
+          <div class="service-icon" style="--icon-color: #f97316;">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3>Internship Programs</h3>
+          <p>Industry-ready internship placements connecting talented students with top companies across media, marketing, and technology sectors.</p>
+          <ul class="service-list">
+            <li>Paid &amp; Stipend Internships</li>
+            <li>Industry Mentorship</li>
+            <li>Certificate &amp; Placement Support</li>
+          </ul>
+          <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROGRAMS & COURSES ==================== -->
+  <section id="programs" class="programs section-pad">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-label"><i class="fas fa-graduation-cap"></i> Skill Development</div>
+        <h2 class="section-title">Programs & Add-On Courses</h2>
+        <p class="section-desc">Industry-relevant programs designed to upskill students and professionals. Earn certifications that employers value.</p>
+      </div>
+
+      <div class="courses-tabs" data-animate="fade-up">
+        <button class="tab-btn active" id="tab-all" data-tab="all">All Courses</button>
+        <button class="tab-btn" id="tab-media" data-tab="media">Media</button>
+        <button class="tab-btn" id="tab-business" data-tab="business">Business</button>
+        <button class="tab-btn" id="tab-tech" data-tab="tech">Technology</button>
+        <button class="tab-btn" id="tab-creative" data-tab="creative">Creative</button>
+      </div>
+
+      <div class="courses-grid" id="courses-grid">
+        <div class="course-card" data-category="media" data-animate="fade-up" id="course-1">
+          <div class="course-img">
+            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&q=80" alt="Video Production Course" loading="lazy" />
+            <span class="course-badge">Media</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 3 Months</span>
+              <span><i class="fas fa-users"></i> 25 Seats</span>
+            </div>
+            <h3>Professional Video Production</h3>
+            <p>Learn cinematography, editing, color grading, and storytelling with industry-standard tools.</p>
+            <div class="course-footer">
+              <span class="course-price">₹12,000<span class="price-period">/course</span></span>
+              <a href="course-details.html?course=video" class="btn btn-sm" id="enroll-video">Course Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card" data-category="business" data-animate="fade-up" id="course-2">
+          <div class="course-img">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&q=80" alt="Digital Marketing Course" loading="lazy" />
+            <span class="course-badge" style="background:#10b981;">Business</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 2 Months</span>
+              <span><i class="fas fa-users"></i> 30 Seats</span>
+            </div>
+            <h3>Digital Marketing Mastery</h3>
+            <p>SEO, Google Ads, social media strategy, analytics, and email marketing — all covered.</p>
+            <div class="course-footer">
+              <span class="course-price">₹9,500<span class="price-period">/course</span></span>
+              <a href="course-details.html?course=dm" class="btn btn-sm" id="enroll-dm">Course Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card" data-category="creative" data-animate="fade-up" id="course-3">
+          <div class="course-img">
+            <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=500&q=80" alt="Graphic Design Course" loading="lazy" />
+            <span class="course-badge" style="background:#f59e0b;">Creative</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 2 Months</span>
+              <span><i class="fas fa-users"></i> 20 Seats</span>
+            </div>
+            <h3>Graphic Design & Branding</h3>
+            <p>Photoshop, Illustrator, Canva, brand identity design and visual communication principles.</p>
+            <div class="course-footer">
+              <span class="course-price">₹8,000<span class="price-period">/course</span></span>
+              <a href="course-details.html?course=gd" class="btn btn-sm" id="enroll-gd">Course Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card" data-category="tech" data-animate="fade-up" id="course-4">
+          <div class="course-img">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80" alt="Web Development Course" loading="lazy" />
+            <span class="course-badge" style="background:#6366f1;">Technology</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 4 Months</span>
+              <span><i class="fas fa-users"></i> 20 Seats</span>
+            </div>
+            <h3>Full-Stack Web Development</h3>
+            <p>HTML, CSS, JavaScript, React, Node.js and deployment — build real projects from day one.</p>
+            <div class="course-footer">
+              <span class="course-price">₹18,000<span class="price-period">/course</span></span>
+              <a href="course-details.html?course=web" class="btn btn-sm" id="enroll-web">Course Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card" data-category="business" data-animate="fade-up" id="course-5">
+          <div class="course-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Event Management Course" loading="lazy" />
+            <span class="course-badge" style="background:#10b981;">Business</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 3 Months</span>
+              <span><i class="fas fa-users"></i> 25 Seats</span>
+            </div>
+            <h3>Event Management Pro</h3>
+            <p>Planning, logistics, vendor management, décor, and live coordination for professional events.</p>
+            <div class="course-footer">
+              <span class="course-price">₹11,000<span class="price-period">/course</span></span>
+              <a href="course-details.html?course=event" class="btn btn-sm" id="enroll-event">Course Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card" data-category="media" data-animate="fade-up" id="course-6">
+          <div class="course-img">
+            <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?w=500&q=80" alt="Photography Course" loading="lazy" />
+            <span class="course-badge">Media</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 6 Weeks</span>
+              <span><i class="fas fa-users"></i> 15 Seats</span>
+            </div>
+            <h3>Professional Photography</h3>
+            <p>DSLR mastery, lighting techniques, composition, editing in Lightroom and Photoshop.</p>
+            <div class="course-footer">
+              <span class="course-price">₹7,500<span class="price-period">/course</span></span>
+              <a href="course-details.html?course=photo" class="btn btn-sm" id="enroll-photo">Course Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;" data-animate="fade-up">
+        <a href="programs.html" class="btn btn-primary" id="view-all-programs">
+          View All Programs <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EVENTS ==================== -->
+  <section id="events" class="events section-pad bg-dark">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-label"><i class="fas fa-fire"></i> Experiences</div>
+        <h2 class="section-title">Our Spectacular Events</h2>
+        <p class="section-desc">We have successfully delivered 500+ high-profile events across the country. Here's a glimpse of the magic we create.</p>
+      </div>
+
+      <div class="events-grid" data-animate="fade-up">
+        <div class="event-card event-large" id="event-1">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Large college cultural festival managed by Elevate Global" loading="lazy" />
+          <div class="event-overlay">
+            <span class="event-tag">College Fest</span>
+            <h3>Wavelength 2024</h3>
+            <p>400+ attendees · 3-day spectacular celebration</p>
+          </div>
+        </div>
+
+        <div class="event-card" id="event-2">
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&q=80" alt="Corporate gala event" loading="lazy" />
+          <div class="event-overlay">
+            <span class="event-tag">Corporate</span>
+            <h3>Brand Launch Gala</h3>
+            <p>250 attendees · Live performances</p>
+          </div>
+        </div>
+
+        <div class="event-card" id="event-3">
+          <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=500&q=80" alt="Music concert event" loading="lazy" />
+          <div class="event-overlay">
+            <span class="event-tag">Concert</span>
+            <h3>Rhythm Nights</h3>
+            <p>1000+ crowd · Open-air concert</p>
+          </div>
+        </div>
+
+        <div class="event-card" id="event-4">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80" alt="Conference event" loading="lazy" />
+          <div class="event-overlay">
+            <span class="event-tag">Conference</span>
+            <h3>EduTech Summit</h3>
+            <p>Speakers from 20+ institutions</p>
+          </div>
+        </div>
+
+        <div class="event-card" id="event-5">
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=500&q=80" alt="Cultural night event" loading="lazy" />
+          <div class="event-overlay">
+            <span class="event-tag">Cultural</span>
+            <h3>Culturama Night</h3>
+            <p>Inter-college cultural extravaganza</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="upcoming-events" data-animate="fade-up">
+        <h3 class="upcoming-title"><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
+        <div class="upcoming-list">
+          <div class="upcoming-item" id="upcoming-1">
+            <div class="upcoming-date"><span class="day">18</span><span class="month">May</span></div>
+            <div class="upcoming-info">
+              <h4>Spring Fest – City College</h4>
+              <p><i class="fas fa-map-marker-alt"></i> Kochi · <i class="fas fa-users"></i> 500 Expected</p>
+            </div>
+            <a href="#contact" class="btn btn-sm btn-outline">Register</a>
+          </div>
+          <div class="upcoming-item" id="upcoming-2">
+            <div class="upcoming-date"><span class="day">02</span><span class="month">Jun</span></div>
+            <div class="upcoming-info">
+              <h4>Brand Summit 2026</h4>
+              <p><i class="fas fa-map-marker-alt"></i> Bangalore · <i class="fas fa-users"></i> 300 Expected</p>
+            </div>
+            <a href="#contact" class="btn btn-sm btn-outline">Register</a>
+          </div>
+          <div class="upcoming-item" id="upcoming-3">
+            <div class="upcoming-date"><span class="day">15</span><span class="month">Jun</span></div>
+            <div class="upcoming-info">
+              <h4>Photography Masterclass</h4>
+              <p><i class="fas fa-map-marker-alt"></i> Online · <i class="fas fa-users"></i> 50 Seats</p>
+            </div>
+            <a href="#contact" class="btn btn-sm btn-outline">Register</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ADMISSION ==================== -->
+  <section id="admission" class="admission section-pad">
+    <div class="container">
+      <div class="admission-wrapper" data-animate="fade-up">
+        <div class="admission-content">
+          <div class="section-label"><i class="fas fa-door-open"></i> Apply Now</div>
+          <h2 class="section-title">Admissions Open 2026</h2>
+          <p>Begin your journey with Elevate Global. Whether you're applying for our add-on courses, seeking college admission counseling, or want to partner with us — we're here to help.</p>
+
+          <div class="admission-steps">
+            <div class="step" id="step-1">
+              <div class="step-num">01</div>
+              <div class="step-info">
+                <h4>Fill the Form</h4>
+                <p>Submit your details using our simple inquiry form.</p>
+              </div>
+            </div>
+            <div class="step" id="step-2">
+              <div class="step-num">02</div>
+              <div class="step-info">
+                <h4>Counseling Session</h4>
+                <p>Our expert team will schedule a personalized session with you.</p>
+              </div>
+            </div>
+            <div class="step" id="step-3">
+              <div class="step-num">03</div>
+              <div class="step-info">
+                <h4>Confirm & Enroll</h4>
+                <p>Choose your program, confirm your seat, and start learning.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="admission-form-box">
+          <div class="form-header">
+            <h3>Quick Admission Inquiry</h3>
+            <p>Fill in your details and we'll reach out within 24 hours.</p>
+          </div>
+          <form class="admission-form" id="admission-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="adm-name">Full Name *</label>
+                <input type="text" id="adm-name" name="name" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label for="adm-phone">Phone *</label>
+                <input type="tel" id="adm-phone" name="phone" placeholder="+91 00000 00000" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="adm-email">Email Address *</label>
+              <input type="email" id="adm-email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="adm-program">Program of Interest *</label>
+              <select id="adm-program" name="program" required>
+                <option value="" disabled selected>Select a program...</option>
+                <option value="video">Professional Video Production</option>
+                <option value="dm">Digital Marketing Mastery</option>
+                <option value="gd">Graphic Design & Branding</option>
+                <option value="web">Full-Stack Web Development</option>
+                <option value="event">Event Management Pro</option>
+                <option value="photo">Professional Photography</option>
+                <option value="admission">College Admission Counseling</option>
+                <option value="other">Other / Consultancy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="adm-message">Message (Optional)</label>
+              <textarea id="adm-message" name="message" rows="3" placeholder="Tell us about your goals..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full-width" id="adm-submit-btn">
+              <i class="fas fa-paper-plane"></i> Submit Inquiry
+            </button>
+          </form>
+          <div class="form-success" id="form-success" style="display:none;">
+            <i class="fas fa-check-circle"></i>
+            <h4>Inquiry Submitted!</h4>
+            <p>We'll contact you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="testimonials section-pad bg-dark">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-label"><i class="fas fa-quote-left"></i> What People Say</div>
+        <h2 class="section-title">Trusted by Hundreds</h2>
+      </div>
+      <div class="testimonials-slider" data-animate="fade-up">
+        <div class="testimonial-track" id="testi-track">
+          <div class="testi-card" id="testi-1">
+            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Elevate Global organized our college fest seamlessly. Every single detail was managed with professionalism. The crowd loved it. 10/10 experience!"</p>
+            <div class="testi-author">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Arjun Nair avatar" />
+              <div><strong>Arjun Nair</strong><span>Student Council President, MAMS College</span></div>
+            </div>
+          </div>
+          <div class="testi-card" id="testi-2">
+            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Their digital marketing course was a game-changer for my career. I was placed in a top agency within a month of completing the program!"</p>
+            <div class="testi-author">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya" alt="Priya Menon avatar" />
+              <div><strong>Priya Menon</strong><span>Digital Marketing Executive</span></div>
+            </div>
+          </div>
+          <div class="testi-card" id="testi-3">
+            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"The ad campaign Elevate Global ran for us doubled our leads in just 45 days. Outstanding team with incredible creativity and commitment!"</p>
+            <div class="testi-author">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Raj" alt="Rahul Sharma avatar" />
+              <div><strong>Rahul Sharma</strong><span>Marketing Director, TechBrand Pvt. Ltd.</span></div>
+            </div>
+          </div>
+          <div class="testi-card" id="testi-4">
+            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Thanks to Elevate Global's admission counseling, I got into my dream university without any stress. Their process is smooth and efficient!"</p>
+            <div class="testi-author">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha" alt="Aisha Khan avatar" />
+              <div><strong>Aisha Khan</strong><span>Medical Student, Admitted 2025</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-controls">
+          <button class="testi-btn" id="testi-prev"><i class="fas fa-chevron-left"></i></button>
+          <div class="testi-dots" id="testi-dots"></div>
+          <button class="testi-btn" id="testi-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="contact section-pad">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-label"><i class="fas fa-envelope"></i> Get In Touch</div>
+        <h2 class="section-title">Let's Talk!</h2>
+        <p class="section-desc">Ready to take the next step? Our team is happy to help you with any queries or collaborations.</p>
+      </div>
+
+      <div class="contact-grid" data-animate="fade-up">
+        <div class="contact-info">
+          <div class="contact-info-card" id="contact-address">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>Our Office</h4>
+              <p>Sooranad, Kollam,<br/>Kerala, 690561</p>
+            </div>
+          </div>
+          <div class="contact-info-card" id="contact-phone">
+            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h4>Call Us</h4>
+              <p><a href="tel:+918086763574">+91 80867 63574</a><br/><a href="tel:+919645507965">+91 96455 07965</a></p>
+            </div>
+          </div>
+          <div class="contact-info-card" id="contact-email">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Email Us</h4>
+              <p><a href="mailto:hello@elevateglobal.in">hello@elevateglobal.in</a><br/><a href="mailto:events@elevateglobal.in">events@elevateglobal.in</a></p>
+            </div>
+          </div>
+          <div class="contact-info-card" id="contact-hours">
+            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h4>Working Hours</h4>
+              <p>Mon–Sat: 9:00 AM – 7:00 PM<br/>Sun: 10:00 AM – 2:00 PM</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link" id="social-fb" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" id="social-ig" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" id="social-yt" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link" id="social-li" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" id="social-tw" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ct-name">Your Name *</label>
+              <input type="text" id="ct-name" name="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="ct-email">Email *</label>
+              <input type="email" id="ct-email" name="email" placeholder="john@example.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ct-subject">Subject *</label>
+            <input type="text" id="ct-subject" name="subject" placeholder="How can we help?" required />
+          </div>
+          <div class="form-group">
+            <label for="ct-message">Message *</label>
+            <textarea id="ct-message" name="message" rows="5" placeholder="Tell us everything..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width" id="ct-submit-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-success" id="contact-success" style="display:none;">
+            <i class="fas fa-check-circle"></i>
+            <h4>Message Sent!</h4>
+            <p>We'll get back to you within 24 hours.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col footer-brand">
+            <div class="nav-logo">
+              <div class="logo-mark"><span class="logo-e">E</span><span class="logo-g">G</span></div>
+              <div class="logo-text"><span class="logo-name">Elevate</span><span class="logo-sub">Global</span></div>
+            </div>
+            <p>Empowering brands, institutions, and individuals to rise above the ordinary. Your success is our mission.</p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="programs.html">Courses</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="admission.html">Admission</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="services.html">Advertisement</a></li>
+              <li><a href="services.html">Media Production</a></li>
+              <li><a href="services.html">Event Management</a></li>
+              <li><a href="services.html">Consultancy</a></li>
+              <li><a href="services.html">Digital Marketing</a></li>
+              <li><a href="services.html">Internship Programs</a></li>
+              <li><a href="admission.html">Admission Services</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <address>
+              <p><i class="fas fa-map-marker-alt"></i> Sooranad, Kollam,<br/>Kerala, 690561</p>
+              <p><i class="fas fa-phone-alt"></i> <a href="tel:+918086763574">+91 80867 63574</a></p>
+              <p><i class="fas fa-envelope"></i> <a href="mailto:hello@elevateglobal.in">hello@elevateglobal.in</a></p>
+            </address>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Elevate Global. All Rights Reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+          <a href="admin.html" style="color:#f59e0b;font-weight:600;"><i class="fas fa-lock"></i> Admin Panel</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-top" id="back-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programs & Courses | Elevate Global</title>
+  <meta name="description" content="Enroll in industry-ready add-on programs and courses at Elevate Global — Media, Digital Marketing, Web Dev, Photography, Event Management and more."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .page-hero{padding:140px 0 80px;text-align:center;background:linear-gradient(180deg,#0a0f1e 0%,#0d1528 100%);position:relative;overflow:hidden;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.15) 0%,transparent 65%);}
+    .page-hero h1{font-family:'Outfit',sans-serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:900;color:#fff;margin-bottom:16px;}
+    .page-hero p{font-size:1.1rem;color:#94a3b8;max-width:600px;margin:0 auto;}
+    .breadcrumb{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;font-size:.85rem;color:#64748b;}
+    .breadcrumb a{color:#0ea5e9;text-decoration:none;}
+    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:64px;}
+    .why-card{background:#141c2f;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;text-align:center;}
+    .why-card i{font-size:2rem;margin-bottom:14px;display:block;background:linear-gradient(135deg,#0ea5e9,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .why-card h4{font-family:'Outfit',sans-serif;font-weight:700;color:#fff;margin-bottom:6px;}
+    .why-card p{font-size:.85rem;color:#64748b;line-height:1.6;}
+    .course-detail-card{display:grid;grid-template-columns:280px 1fr;background:#141c2f;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin-bottom:24px;transition:all .3s ease;}
+    .course-detail-card:hover{border-color:rgba(14,165,233,.25);transform:translateX(6px);}
+    .cdc-img{position:relative;overflow:hidden;}
+    .cdc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+    .course-detail-card:hover .cdc-img img{transform:scale(1.06);}
+    .cdc-badge{position:absolute;top:14px;left:14px;padding:4px 14px;border-radius:50px;font-size:.75rem;font-weight:700;color:#fff;font-family:'Outfit',sans-serif;}
+    .cdc-body{padding:32px;}
+    .cdc-meta{display:flex;gap:20px;margin-bottom:12px;flex-wrap:wrap;}
+    .cdc-meta span{font-size:.82rem;color:#64748b;}
+    .cdc-meta i{color:#0ea5e9;margin-right:4px;}
+    .cdc-body h3{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:8px;}
+    .cdc-body p{color:#94a3b8;line-height:1.7;margin-bottom:16px;font-size:.93rem;}
+    .cdc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+    .cdc-tag{background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#0ea5e9;padding:4px 12px;border-radius:50px;font-size:.78rem;font-family:'Outfit',sans-serif;font-weight:600;}
+    .cdc-footer{display:flex;align-items:center;gap:20px;border-top:1px solid rgba(255,255,255,.06);padding-top:16px;}
+    .cdc-price{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;}
+    .cdc-price small{font-size:.75rem;font-weight:400;color:#64748b;}
+    @media(max-width:768px){.why-grid{grid-template-columns:repeat(2,1fr);}.course-detail-card{grid-template-columns:1fr;}.cdc-img{height:200px;}}
+  </style>
+</head>
+<body>
+  <header id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark"><span class="logo-e">E</span><span class="logo-g">G</span></div>
+        <div class="logo-text"><span class="logo-name">Elevate</span><span class="logo-sub">Global</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="programs.html" class="nav-link active">Programs</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="admission.html" class="nav-link">Admission</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" style="display:flex;gap:12px;align-items:center;margin-left:auto;">
+         <a href="login.html" class="btn btn-outline" id="nav-auth-btn" style="padding:8px 20px;font-size:.85rem;border-color:rgba(14,165,233,.3);color:#0ea5e9;">Student Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> <span>Programs &amp; Courses</span></div>
+      <h1>Programs &amp; <span class="gradient-text">Courses</span></h1>
+      <p>Industry-certified add-on programs designed to upskill students and working professionals.</p>
+    </div>
+  </div>
+
+  <section class="section-pad">
+    <div class="container">
+
+      <div class="why-grid" data-animate="fade-up">
+        <div class="why-card"><i class="fas fa-certificate"></i><h4>Industry Certificate</h4><p>Recognized certifications valued by top employers nationwide.</p></div>
+        <div class="why-card"><i class="fas fa-chalkboard-teacher"></i><h4>Expert Trainers</h4><p>Learn from working professionals with real-world experience.</p></div>
+        <div class="why-card"><i class="fas fa-briefcase"></i><h4>Placement Support</h4><p>Career guidance and placement assistance after completion.</p></div>
+        <div class="why-card"><i class="fas fa-laptop"></i><h4>Hands-On Projects</h4><p>Build a real portfolio with projects during the course.</p></div>
+      </div>
+
+      <div class="course-detail-card" data-animate="fade-up">
+        <div class="cdc-img">
+          <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&q=80" alt="Video Production Course"/>
+          <span class="cdc-badge" style="background:#0ea5e9;">Media</span>
+        </div>
+        <div class="cdc-body">
+          <div class="cdc-meta">
+            <span><i class="fas fa-clock"></i>3 Months</span>
+            <span><i class="fas fa-users"></i>25 Seats</span>
+            <span><i class="fas fa-calendar"></i>Next Batch: May 15, 2026</span>
+            <span><i class="fas fa-signal"></i>Beginner to Advanced</span>
+          </div>
+          <h3>Professional Video Production</h3>
+          <p>Master the art of filmmaking — from pre-production to post. Learn cinematography, lighting, audio, editing in Premiere Pro & DaVinci, and color grading.</p>
+          <div class="cdc-tags">
+            <span class="cdc-tag">Cinematography</span><span class="cdc-tag">Adobe Premiere</span><span class="cdc-tag">DaVinci Resolve</span><span class="cdc-tag">Color Grading</span><span class="cdc-tag">Storytelling</span>
+          </div>
+          <div class="cdc-footer">
+            <span class="cdc-price">₹12,000 <small>/course</small></span>
+            <a href="course-details.html?course=video" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail-card" data-animate="fade-up">
+        <div class="cdc-img">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&q=80" alt="Digital Marketing Course"/>
+          <span class="cdc-badge" style="background:#10b981;">Business</span>
+        </div>
+        <div class="cdc-body">
+          <div class="cdc-meta">
+            <span><i class="fas fa-clock"></i>2 Months</span>
+            <span><i class="fas fa-users"></i>30 Seats</span>
+            <span><i class="fas fa-calendar"></i>Next Batch: May 1, 2026</span>
+            <span><i class="fas fa-signal"></i>Beginner Friendly</span>
+          </div>
+          <h3>Digital Marketing Mastery</h3>
+          <p>A complete digital marketing program covering SEO, Google Ads, Meta Ads, email marketing, analytics, and social media strategy. Get certified in 8 weeks.</p>
+          <div class="cdc-tags">
+            <span class="cdc-tag">SEO</span><span class="cdc-tag">Google Ads</span><span class="cdc-tag">Meta Ads</span><span class="cdc-tag">Email Marketing</span><span class="cdc-tag">Analytics</span>
+          </div>
+          <div class="cdc-footer">
+            <span class="cdc-price">₹9,500 <small>/course</small></span>
+            <a href="course-details.html?course=dm" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail-card" data-animate="fade-up">
+        <div class="cdc-img">
+          <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=500&q=80" alt="Graphic Design Course"/>
+          <span class="cdc-badge" style="background:#f59e0b;">Creative</span>
+        </div>
+        <div class="cdc-body">
+          <div class="cdc-meta">
+            <span><i class="fas fa-clock"></i>2 Months</span>
+            <span><i class="fas fa-users"></i>20 Seats</span>
+            <span><i class="fas fa-calendar"></i>Next Batch: May 10, 2026</span>
+            <span><i class="fas fa-signal"></i>Beginner to Intermediate</span>
+          </div>
+          <h3>Graphic Design &amp; Branding</h3>
+          <p>Learn Photoshop, Illustrator, Canva, logo design, typography, brand identity creation, and visual communication with hands-on briefs from real clients.</p>
+          <div class="cdc-tags">
+            <span class="cdc-tag">Photoshop</span><span class="cdc-tag">Illustrator</span><span class="cdc-tag">Canva</span><span class="cdc-tag">Logo Design</span><span class="cdc-tag">Typography</span>
+          </div>
+          <div class="cdc-footer">
+            <span class="cdc-price">₹8,000 <small>/course</small></span>
+            <a href="course-details.html?course=gd" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail-card" data-animate="fade-up">
+        <div class="cdc-img">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80" alt="Web Development Course"/>
+          <span class="cdc-badge" style="background:#6366f1;">Technology</span>
+        </div>
+        <div class="cdc-body">
+          <div class="cdc-meta">
+            <span><i class="fas fa-clock"></i>4 Months</span>
+            <span><i class="fas fa-users"></i>20 Seats</span>
+            <span><i class="fas fa-calendar"></i>Next Batch: Jun 1, 2026</span>
+            <span><i class="fas fa-signal"></i>Zero to Hero</span>
+          </div>
+          <h3>Full-Stack Web Development</h3>
+          <p>From HTML to deployment — learn HTML, CSS, JavaScript, React, Node.js, databases, and API integration. Build 5+ real projects you can showcase to employers.</p>
+          <div class="cdc-tags">
+            <span class="cdc-tag">HTML/CSS</span><span class="cdc-tag">JavaScript</span><span class="cdc-tag">React</span><span class="cdc-tag">Node.js</span><span class="cdc-tag">MongoDB</span>
+          </div>
+          <div class="cdc-footer">
+            <span class="cdc-price">₹18,000 <small>/course</small></span>
+            <a href="course-details.html?course=web" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail-card" data-animate="fade-up">
+        <div class="cdc-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Event Management Course"/>
+          <span class="cdc-badge" style="background:#10b981;">Business</span>
+        </div>
+        <div class="cdc-body">
+          <div class="cdc-meta">
+            <span><i class="fas fa-clock"></i>3 Months</span>
+            <span><i class="fas fa-users"></i>25 Seats</span>
+            <span><i class="fas fa-calendar"></i>Next Batch: May 20, 2026</span>
+            <span><i class="fas fa-signal"></i>Beginner to Pro</span>
+          </div>
+          <h3>Event Management Pro</h3>
+          <p>Comprehensive training in event planning, vendor management, budgeting, stage production, décor, logistics, and live event coordination. Includes live event internship.</p>
+          <div class="cdc-tags">
+            <span class="cdc-tag">Event Planning</span><span class="cdc-tag">Vendor Management</span><span class="cdc-tag">Stage Design</span><span class="cdc-tag">Budgeting</span>
+          </div>
+          <div class="cdc-footer">
+            <span class="cdc-price">₹11,000 <small>/course</small></span>
+            <a href="course-details.html?course=event" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail-card" data-animate="fade-up">
+        <div class="cdc-img">
+          <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?w=500&q=80" alt="Photography Course"/>
+          <span class="cdc-badge" style="background:#0ea5e9;">Media</span>
+        </div>
+        <div class="cdc-body">
+          <div class="cdc-meta">
+            <span><i class="fas fa-clock"></i>6 Weeks</span>
+            <span><i class="fas fa-users"></i>15 Seats</span>
+            <span><i class="fas fa-calendar"></i>Next Batch: May 5, 2026</span>
+            <span><i class="fas fa-signal"></i>All Levels</span>
+          </div>
+          <h3>Professional Photography</h3>
+          <p>DSLR mastery, lighting techniques, portrait & product photography, composition, and post-processing in Lightroom and Photoshop. Walk away with a professional portfolio.</p>
+          <div class="cdc-tags">
+            <span class="cdc-tag">DSLR</span><span class="cdc-tag">Lightroom</span><span class="cdc-tag">Composition</span><span class="cdc-tag">Lighting</span><span class="cdc-tag">Portfolio</span>
+          </div>
+          <div class="cdc-footer">
+            <span class="cdc-price">₹7,500 <small>/course</small></span>
+            <a href="course-details.html?course=photo" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 24px;">
+        <p style="font-size:.85rem;color:#64748b;">© 2026 Elevate Global. All Rights Reserved.</p>
+        <div style="display:flex;gap:20px;">
+          <a href="index.html" style="font-size:.85rem;color:#64748b;">Home</a>
+          <a href="programs.html" style="font-size:.85rem;color:#0ea5e9;">Programs</a>
+          <a href="admission.html" style="font-size:.85rem;color:#64748b;">Admission</a>
+          <a href="admin.html" style="font-size:.85rem;color:#f59e0b;font-weight:600;"><i class="fas fa-lock"></i> Admin Panel</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <button class="back-top" id="back-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <script>
+    document.getElementById('hamburger').addEventListener('click',function(){this.classList.toggle('active');document.getElementById('nav-menu').classList.toggle('open');});
+    window.addEventListener('scroll',()=>document.getElementById('back-top').classList.toggle('visible',window.scrollY>200));
+    document.getElementById('back-top').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('[data-animate]').forEach(el=>obs.observe(el));
+  </script>
+</body>
+</html>
